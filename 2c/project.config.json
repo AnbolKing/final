@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
   "projectname": "2c",
-  "description": "this project is 2c that is work on wx",
+  "description": "2c",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,

@@ -1,6 +1,6 @@
 const config = {
   projectName: '2c',
-  date: '2022-2-20',
+  date: '2022-3-3',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,

@@ -5,7 +5,7 @@ import './index.less'
 const Home = () => {
   return (
     <View className='index'>
-      <Text>Home</Text>
+      <Text>Mine</Text>
     </View>
   )
 }
