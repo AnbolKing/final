@@ -1,13 +1,13 @@
 {
-  "miniprogramRoot": "./dist",
-  "projectname": "2c",
-  "description": "2c",
-  "appid": "touristappid",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false
-  },
-  "compileType": "miniprogram"
+    "miniprogramRoot": "./dist",
+    "projectname": "2c",
+    "description": "2c",
+    "appid": "wx823c68fdabb37daf",
+    "setting": {
+        "urlCheck": true,
+        "es6": false,
+        "postcss": false,
+        "minified": false
+    },
+    "compileType": "miniprogram"
 }
