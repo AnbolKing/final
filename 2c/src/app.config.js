@@ -1,7 +1,7 @@
 export default {
   pages: [
-    'pages/home/index',
     'pages/order/index',
+    'pages/home/index',
     'pages/mine/index',
   ],
   window: {
