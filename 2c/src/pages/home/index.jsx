@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Swiper, Image, SwiperItem, ScrollView } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 import './index.less';
-import { TAB_ITEMS, CARD_HEIGHT } from '../../define/const';
+import { TAB_ITEMS, CARD_HEIGHT, IMG_URL } from '../../define/const';
 import { LIST_CARDS } from '../../define/mock';
+import { sleep } from '../../utils/sleep';
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,6 +18,8 @@ class Home extends React.Component {
       scrollHeight: 2400, // list scroll height
       tabFix: false, // tab fixed
       hasMore: true, // has more
+      bottomText: '点我加载更多哦~',
+      loading: false,
     }
   }
   // fetch swiper imgs
@@ -60,6 +62,7 @@ class Home extends React.Component {
     this.setState({
       channels: [
         {
+          key: 'second_hand',
           first_title: '二手专场',
           second_title: '好物精选',
           list: [
@@ -74,6 +77,7 @@ class Home extends React.Component {
           ]
         },
         {
+          key: 'lottery',
           first_title: '抽奖专场',
           second_title: '福利宠粉',
           list: [
@@ -128,13 +132,40 @@ class Home extends React.Component {
     }
   }
 
+  // fetch more list
+  handleLoadMore = async () => {
+    this.setState({
+      bottomText: '加载中',
+      loading: true
+    })
+    const hasMore = await sleep(3000, true);
+    const res = LIST_CARDS;
+    const newCards = [...this.state.cards, ...res];
+    const rows = Math.ceil(newCards.length / 2);
+    this.setState({
+      cards: newCards,
+      scrollHeight: rows * CARD_HEIGHT,
+      bottomText: hasMore ? '点我加载更多哦~' : '已经到底了哦~喜欢就下单吧! ',
+      hasMore,
+      loading: false,
+    })
+  }
+
   // render bottom
   renderBottom = () => {
-    const {hasMore} = this.state;
+    const { hasMore, bottomText, loading } = this.state;
     if(hasMore) {
       return (
         <View className='divider-wrapper'>
-          <Text className='text'>点我加载更多哦~</Text>
+          {
+            loading ? (
+              <Image 
+                src={IMG_URL.loading}
+                className='load-img'
+              />
+            ) : null
+          }
+          <Text className='text' onClick={this.handleLoadMore}>{bottomText}</Text>
         </View>
       )
     }
@@ -142,7 +173,7 @@ class Home extends React.Component {
       return (
         <View className='divider-wrapper'>
           <View className='divider'></View>
-          <Text className='text'>已经到底了哦~喜欢就下单吧! </Text>
+          <Text className='text'>{bottomText}</Text>
           <View className='divider'></View>
         </View>
       )
@@ -244,22 +275,30 @@ class Home extends React.Component {
         {/* special two channels */}
         <View className='channels-wrapper'>
           {
-            channels.map((item, index) => {
+            channels.map((channel) => {
               return (
-                <View className='channel-container' key={index}>
+                <View className='channel-container' key={channel.key}>
                   <View className='channel-title'>
-                    <Text className='first-title'>{item.first_title}</Text>
+                    <Text className='first-title'>{channel.first_title}</Text>
                     <View className='tag-title'>
-                      <Text className='second-title'>{item.second_title}</Text>
+                      <Text className='second-title'>{channel.second_title}</Text>
                     </View>
                   </View>
                   <View className='channel-list'>
                     {
-                      item.list.map((item, _index) => {
+                      channel.list.map((item, _index) => {
                         return (
-                          <View className='list-item'>
+                          <View className='list-item' key={_index}>
                             <Image src={item.imgUrl} className='item-img' />
                             <Text className='item-desc'>{item.desc}</Text>
+                            {
+                              channel.key==='second_hand' ? (
+                                <Image 
+                                  src={IMG_URL.recommend} 
+                                  className='hot-img'
+                                />
+                              ) : null
+                            }
                           </View>
                         )
                       })
@@ -300,6 +339,7 @@ class Home extends React.Component {
           className='list-swiper'
           autoplay={false}
           style={{ height: `${scrollHeight}rpx` }}
+          onChange={this.handleSwiperTab}
         >
           {
             TAB_ITEMS.map((tabs, index) => {

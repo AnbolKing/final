@@ -7,11 +7,11 @@
     color: #DC6247;
     font-size: 0.6rem;
     font-weight: 700;
-    font-family: 'Din';
+    font-family: 'Din-Bold';
   }
 
   .price-pre {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .price-dot {
@@ -134,6 +134,7 @@
 
         .list-item {
           width: 50%;
+          position: relative;
           .item-img {
             width: 170px;
             height: 180px;
@@ -144,6 +145,13 @@
             margin-top: 20px;
             display: flex;
             justify-content: center;
+          }
+          .hot-img {
+            width: 88rpx;
+            height: 88rpx;
+            position: absolute;
+            top: 0;
+            right: 0;
           }
         }
       }
@@ -171,7 +179,6 @@
       display: inline-block;
       width: 20%;
       font-size: 1rem;
-      font-family: 'PingFang Regular';
       text-align: center;
     }
 
@@ -282,6 +289,11 @@
         display: inline-block;
         padding: 0 0.5em;
         color: #81817F;
+      }
+
+      .load-img {
+        width: 50rpx;
+        height: 50rpx;
       }
     }  
   }

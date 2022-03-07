@@ -48,4 +48,4 @@ export const LIST_CARDS = [
     price: '9.9',
     id: '1234rfghj',
   }
-]
+];
