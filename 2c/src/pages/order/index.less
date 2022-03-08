@@ -5,15 +5,47 @@
 
   .tab-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 80rpx;
-    line-height: 80rpx;
 
     .tab-item {
       color: #808182;
       font-size: 0.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      position: relative;
+
+      .tab-text {
+        z-index: 99;
+      }
+
+      .num-tag {
+        position: absolute;
+        width: 32rpx;
+        height: 32rpx;
+        border-radius: 50%;
+        background-color: #DF6053;
+        color: #ffffff;
+        font-family: 'Din-Bold';
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.5rem;
+        padding: 0;
+        transform: translate(70%, 50%);
+        box-sizing: border-box;
+        line-height: 0;
+
+        .tag-text {
+          transform: translateY(-50%);
+        }
+      }
     }
 
     .tab-item-active {
@@ -37,19 +69,179 @@
     }
   }
 
-  .orders-wrapper {
-    margin-top: 100rpx;
+  .content-wrapper {
     height: ~'calc(100vh - 80rpx )';
-
-    .empty-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .empty-img {
-        width: 300rpx;
-        height: 300rpx;
-      }
-    }  
   }
+
+  .empty-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100rpx;
+
+    .empty-img {
+      background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M948.313 135.05c-22.26-20.778-46.006-31.166-74.203-31.166H657.438c-11.873-29.681-29.681-54.91-56.395-74.203C575.814 8.904 546.133 0 512 0s-63.814 8.904-90.528 28.197-44.521 44.522-56.394 74.203H149.89c-28.197 0-51.942 11.872-74.203 31.165-20.777 20.777-31.165 44.522-31.165 72.72v713.83c0 26.714 10.388 50.459 31.165 71.236 22.26 22.26 46.006 32.649 74.203 32.649h725.704c28.197 0 51.942-10.388 72.719-31.165 20.777-20.777 31.165-44.522 31.165-71.235V206.284c0-26.713-10.388-50.458-31.165-71.235zM617.368 820.683H250.806V716.8h365.078v103.884zM773.194 614.4H250.806V513.484H771.71V614.4zm0-204.8H250.806V307.2H771.71v102.4z' fill='%23E9EAEB' data-spm-anchor-id='a313x.7781069.0.i7'/%3E%3Cpath d='M474.899 117.24c10.388-8.904 22.26-14.84 37.101-14.84s26.713 4.452 37.101 14.84c10.389 8.905 14.841 22.261 14.841 35.618 0 14.84-4.452 26.713-14.84 37.101S526.84 206.284 512 206.284s-26.713-4.452-37.101-14.84-14.841-22.261-14.841-37.102c1.484-14.84 5.936-26.713 14.84-37.101z' fill='%23E9EAEB' data-spm-anchor-id='a313x.7781069.0.i11'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    .empty {
+      width: 150rpx;
+      height: 150rpx;
+    }
+
+    .empty-text {
+      color: #C9CACB;
+      margin-top: 50rpx;
+      font-size: 1rem;
+    }
+  }
+
+  .orders-wrapper {
+    height: 100%;
+    width: 100%;
+    padding-top: 30rpx;
+
+    .item-wrapper {
+      background-color: #ffffff;
+      border-radius: 20rpx;
+      padding: 20rpx 20rpx;
+
+      .item-status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .store-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+          }
+
+          .store-img {
+            width: 60rpx;
+            height: 60rpx;
+            border-radius: 50%;
+          }
+
+          .store-name {
+            margin-left: 15rpx;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+            width: 300rpx;
+          }
+
+          .store-arr {
+            margin-left: 15rpx;
+          }
+        }
+
+        .right {
+          color: #DF603B;
+        }
+      }
+
+      .item-content {
+        margin-top: 30rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .good-img {
+          width: 330rpx;
+          height: 200rpx;
+          border-radius: 20rpx;
+          box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0px 0px 50px #ddd inset;
+        }
+
+        .item-detail {
+          margin-left: 25rpx;
+          height: 200rpx;
+
+          .detail-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .good-desc {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow:ellipsis;
+              width: 300rpx;
+            }
+
+            .good-price {
+              font-family: 'Din-Bold';
+            }
+          }
+
+          .detail-mid {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #818181;
+            margin: 20rpx 0;
+          }
+          
+          .detail-bottom {
+            width: 100%;
+            .good-benefit {
+              display: inline-block;
+              margin-right: 10rpx;
+              background-color: #FFE8EA;
+              color: #D0665D;
+              border-radius: 20px;
+              padding: 5px 15px;
+              border: 1px solid #D0665D;
+              font-size: 25rpx;
+            }
+          }
+        }
+      }
+
+      .item-price {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 30rpx 0;
+
+        .price {
+          margin-left: 20rpx;
+        }
+
+        .all-price {
+          color: #828282;
+        }
+
+        .need-pay .all-num {
+          font-family: 'Din-Bold';
+          font-size: 1.1rem;
+        }
+      }
+
+      .item-btn {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .btn {
+          width: 170rpx;
+          height: 60rpx;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 40rpx;
+          border: 1px solid #898989;
+          margin-left: 20rpx;
+        }
+      }
+    }
+  }
+
 }

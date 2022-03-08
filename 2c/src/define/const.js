@@ -55,3 +55,15 @@ export const IMG_URL = {
   recommend: 'https://s3.bmp.ovh/imgs/2022/03/f2adb71b15c0996d.png',
   emptyOrder: 'https://s3.bmp.ovh/imgs/2022/03/1d91e417f4ef149e.png',
 }
+
+export const ORDER_STATUS = {
+  1: '待付款',
+  2: '待发货',
+  3: '待收货',
+  4: '待评价',
+}
+
+export const ORDER_BENEFIT = {
+  1: '七天无理由退货',
+  2: '送运费险'
+}
