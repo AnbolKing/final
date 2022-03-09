@@ -67,3 +67,5 @@ export const ORDER_BENEFIT = {
   1: '七天无理由退货',
   2: '送运费险'
 }
+
+export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';
