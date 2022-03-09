@@ -34,6 +34,39 @@ const Order = () => {
     )
   }
 
+  const renderBtns = (status) => {
+    if(status === 1) {
+      return (
+        <View className='item-btn'>
+          <View className='btn btn-cancel'>取消订单</View>
+          <View className='btn btn-ok'>付款</View>
+        </View>
+      )
+    }
+    if(status === 2) {
+      return (
+        <View className='item-btn'>
+          <View className='btn btn-cancel'>取消订单</View>
+        </View>
+      )
+    }
+    if(status === 3) {
+      return (
+        <View className='item-btn'>
+          <View className='btn btn-help'>联系售后</View>
+          <View className='btn btn-sure'>确认收货</View>
+        </View>
+      )
+    }
+    if(status === 4) {
+      return (
+        <View className='item-btn'>
+          <View className='btn btn-help'>联系售后</View>
+        </View>
+      )
+    }
+  }
+
   const renderOrders = () => {
     return (
       <View className='orders-wrapper'>
@@ -81,10 +114,9 @@ const Order = () => {
                     <Text className='all-num'>{item.good_need_pay}</Text>
                   </View>
                 </View>
-                <View className='item-btn'>
-                  <View className='btn btn-cancel'>取消订单</View>
-                  <View className='btn btn-cancel'>付款</View>
-                </View>
+                {
+                  renderBtns(item.status)
+                }
               </View>
             )
           })

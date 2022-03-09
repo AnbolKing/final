@@ -105,7 +105,7 @@
     .item-wrapper {
       background-color: #ffffff;
       border-radius: 20rpx;
-      padding: 20rpx 20rpx;
+      padding: 10rpx 20rpx;
 
       .item-status {
         display: flex;
@@ -147,14 +147,14 @@
       }
 
       .item-content {
-        margin-top: 30rpx;
+        margin-top: 20rpx;
         display: flex;
         justify-content: center;
         align-items: center;
 
         .good-img {
           width: 330rpx;
-          height: 200rpx;
+          height: 170rpx;
           border-radius: 20rpx;
           box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0px 0px 50px #ddd inset;
         }
@@ -209,7 +209,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin: 30rpx 0;
+        margin: 13rpx 0;
 
         .price {
           margin-left: 20rpx;
@@ -229,16 +229,26 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        font-family: none;
 
         .btn {
-          width: 170rpx;
-          height: 60rpx;
+          width: 165rpx;
+          height: 55rpx;
           display: flex;
           justify-content: center;
           align-items: center;
           border-radius: 40rpx;
           border: 1px solid #898989;
           margin-left: 20rpx;
+          color: #000000;
+          box-sizing: border-box;
+          font-size: 0.9rem;
+
+          &.btn-ok,
+          &.btn-sure {
+            color: #EC595B;
+            border-color: #DE6560;
+          }
         }
       }
     }
