@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, ScrollView, Text, Image } from '@tarojs/components';
 import {ORDER_TAB, ORDER_STATUS, ORDER_BENEFIT} from '../../define/const';
 import {ORDER_ITEM} from '../../define/mock';
+import { sleep } from '../../utils/sleep';
 import './index.less';
 
 const Order = () => {
@@ -9,6 +10,8 @@ const Order = () => {
   const [tabActive, setTabActive] = useState(0);
   const [orders, setOrders] = useState({});
   const [showEmpty, setShowEmpty] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+  const [switchTab, setSwitchTab] = useState(false);
 
   const fetchOrders = () => {
     const res = [1];
@@ -21,8 +24,23 @@ const Order = () => {
     }
   }
 
+  // switch tab
   const handleChangeTab = (index, key) => {
     setTabActive(index);
+  }
+
+  // pull refresh
+  const handlePullRefresh = async () => {
+    setRefresh(true);
+    const res = await sleep(2000, '123');
+    setRefresh(false);
+  }
+
+  // switch refresh
+  const handleSwitchRefresh = async () => {
+    setSwitchTab(true)
+    const res = await sleep(2000, '123');
+    setSwitchTab(false);
   }
 
   const renderEmpty = () => {
@@ -30,6 +48,15 @@ const Order = () => {
       <View className='empty-wrapper'>
         <Text className='empty-img empty'/>
         <Text className='empty-text'>暂无相关订单</Text>
+      </View>
+    )
+  }
+
+  const renderRefresh = () => {
+    return (
+      <View className='refresh-wrapper'>
+        <View className='refresh-icon icon'></View>
+        <Text className='refresh-text'>加载中</Text>
       </View>
     )
   }
@@ -71,57 +98,65 @@ const Order = () => {
     return (
       <View className='orders-wrapper'>
         {
-          ORDER_ITEM.map((item, index) => {
-            return (
-              <View className='item-wrapper'>
-                <View className='item-status'>
-                  <View className='left'>
-                    <Image src={item.store_img} className='store-img' />
-                    <Text className='store-name store-text'>{item.store_name}</Text>
-                    <Text className='store-arr store-text'>{'>'}</Text>
-                  </View>
-                  <View className='right'>{ORDER_STATUS[item.status]}</View>
-                </View>
-                <View className='item-content'>
-                  <Image src={item.good_img} className='good-img'/>
-                  <View className='item-detail'>
-                    <View className='detail-top'>
-                      <Text className='good-desc'>{item.good_desc}</Text>
-                      <Text className='good-price'>￥{item.good_all_price}</Text>
-                    </View>
-                    <View className='detail-mid'>
-                      <Text className='good-info'>{item.good_info}</Text>
-                      <Text className='good-nums'>X{item.good_nums}</Text>
-                    </View>
-                    <View className='detail-bottom'>
-                      {
-                        item.good_benefits.map(benefit => {
-                          return (
-                            <Text className='good-benefit'>{ORDER_BENEFIT[benefit]}</Text>
-                          )
-                        })
-                      }
-                    </View>
-                  </View>
-                </View>
-                <View className='item-price'>
-                  <View className='price all-price'>
-                    总价￥
-                    <Text className='all-num'>{item.good_all_price}</Text>
-                  </View>
-                  <View className='price need-pay'>
-                    需付款￥
-                    <Text className='all-num'>{item.good_need_pay}</Text>
-                  </View>
-                </View>
-                {
-                  renderBtns(item.status)
-                }
-              </View>
-            )
-          })
+          switchTab
+          ? renderRefresh()
+          : renderOrderItems()
         }
       </View>
+    )
+  }
+
+  const renderOrderItems = () => {
+    return (
+      ORDER_ITEM.map((item, index) => {
+        return (
+          <View className='item-wrapper'>
+            <View className='item-status'>
+              <View className='left'>
+                <Image src={item.store_img} className='store-img' />
+                <Text className='store-name store-text'>{item.store_name}</Text>
+                <Text className='store-arr store-text'>{'>'}</Text>
+              </View>
+              <View className='right'>{ORDER_STATUS[item.status]}</View>
+            </View>
+            <View className='item-content'>
+              <Image src={item.good_img} className='good-img'/>
+              <View className='item-detail'>
+                <View className='detail-top'>
+                  <Text className='good-desc'>{item.good_desc}</Text>
+                  <Text className='good-price'>￥{item.good_all_price}</Text>
+                </View>
+                <View className='detail-mid'>
+                  <Text className='good-info'>{item.good_info}</Text>
+                  <Text className='good-nums'>X{item.good_nums}</Text>
+                </View>
+                <View className='detail-bottom'>
+                  {
+                    item.good_benefits.map(benefit => {
+                      return (
+                        <Text className='good-benefit'>{ORDER_BENEFIT[benefit]}</Text>
+                      )
+                    })
+                  }
+                </View>
+              </View>
+            </View>
+            <View className='item-price'>
+              <View className='price all-price'>
+                总价￥
+                <Text className='all-num'>{item.good_all_price}</Text>
+              </View>
+              <View className='price need-pay'>
+                需付款￥
+                <Text className='all-num'>{item.good_need_pay}</Text>
+              </View>
+            </View>
+            {
+              renderBtns(item.status)
+            }
+          </View>
+        )
+      })
     )
   }
 
@@ -130,7 +165,10 @@ const Order = () => {
     fetchOrders();
   }, []);
 
-  // judge empty
+  // switch tab
+  useEffect(() => {
+    handleSwitchRefresh();
+  }, [tabActive])
 
   return (
     <View className='order-container'>
@@ -160,6 +198,13 @@ const Order = () => {
       {/* orders */}
       <ScrollView
         className='content-wrapper'
+        refresherTriggered={refresh}
+        refresherEnabled={true}
+        refresherThreshold={30}
+        scrollY={true}
+        showScrollbar={false}
+        enhanced={true}
+        onRefresherPulling={handlePullRefresh}
       >
         {
           showEmpty

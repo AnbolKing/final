@@ -1,7 +1,7 @@
-export const sleep = (time, hasMore) => {
+export const sleep = (time, value) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(hasMore);
+      resolve(value);
     }, time)
   })
 }
