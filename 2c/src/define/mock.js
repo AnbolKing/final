@@ -104,3 +104,29 @@ export const ORDER_ITEM  = [
     good_need_pay: '1499',
   }
 ]
+
+export const MINE_INFO = {
+  avatar: 'https://img2.baidu.com/it/u=1652427738,3139747163&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+  name: '勇敢的赫奇',
+}
+
+export const ADDRESS = [
+  {
+    name: '王子安',
+    phone: '18370605879',
+    one_level: '江西省',
+    two_level: '吉安市',
+    three_level: '永丰县',
+    detail: '恩江镇地王大厦5单元0503室',
+    isChecked: true,
+  },
+  {
+    name: '王大炮',
+    phone: '18370605879',
+    one_level: '北京',
+    two_level: '北京市',
+    three_level: '海淀区',
+    detail: '上帝街道上地东路1号鹏寰国际大厦大厦6FA区',
+    isChecked: false,
+  }
+]

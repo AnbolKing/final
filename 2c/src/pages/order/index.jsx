@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { View, ScrollView, Text, Image } from '@tarojs/components';
+import Taro, { useDidShow, useDidHide } from '@tarojs/taro';
 import {ORDER_TAB, ORDER_STATUS, ORDER_BENEFIT} from '../../define/const';
 import {ORDER_ITEM} from '../../define/mock';
 import { sleep } from '../../utils/sleep';
@@ -7,13 +8,13 @@ import './index.less';
 
 const Order = () => {
 
-  const [tabActive, setTabActive] = useState(0);
+  const [tabActive, setTabActive] = useState(null);
   const [orders, setOrders] = useState({});
   const [showEmpty, setShowEmpty] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [switchTab, setSwitchTab] = useState(false);
 
-  const fetchOrders = () => {
+  const fetchOrders = (status) => {
     const res = [1];
     setOrders(res);
     if(res.length === 0) {
@@ -161,9 +162,47 @@ const Order = () => {
   }
 
   // init
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+  useDidShow(() => {
+    const orderKey = Taro.getStorageSync('order_status');
+    console.log(orderKey);
+    if(orderKey) {
+      switch(orderKey) {
+        case 'all':
+          setTabActive(0)
+          fetchOrders(0);
+          return ;
+        case 'wait_pay':
+          setTabActive(1)
+          fetchOrders(1);
+          return ;
+        case 'wait_go':
+          setTabActive(2)
+          fetchOrders(2);
+          return ;
+        case 'wait_recive':
+          setTabActive(3)
+          fetchOrders(3);
+          return ;
+        case 'wait_judge':
+          setTabActive(4)
+          fetchOrders(4);
+          return ;
+        default:
+          setTabActive(0)
+          fetchOrders(0);
+          return ;
+      }
+    }
+    else {
+      fetchOrders(0);
+    }
+  });
+
+  // destory order_key
+  // useDidHide(() => {
+  //   Taro.setStorageSync('order_status', '');
+  //   console.log(Taro.getStorageSync('order_status'))
+  // })
 
   // switch tab
   useEffect(() => {

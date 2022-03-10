@@ -68,4 +68,80 @@ export const ORDER_BENEFIT = {
   2: '送运费险'
 }
 
+export const MINE_TABS = [
+  {
+    imgClass: 'collect',
+    text: '收藏',
+  },
+  {
+    imgClass: 'address',
+    text: '我的地址'
+  },
+  {
+    imgClass: 'person',
+    text: '个人信息'
+  },
+  {
+    imgClass: 'about',
+    text: '关于小店',
+  }
+]
+
+export const MINE_ORDERS = [
+  {
+    imgClass: 'wait_pay',
+    text: '待支付',
+  },
+  {
+    imgClass: 'wait_go',
+    text: '待发货',
+  },
+  {
+    imgClass: 'wait_recive',
+    text: '待收货',
+  },
+  {
+    imgClass: 'wait_judge',
+    text: '待评价',
+  },
+  {
+    imgClass: 'all',
+    text: '全部订单',
+  }
+]
+
+export const ABOUT_ITEMS = [
+  {
+    key: 'quilty',
+    text: '商品质量保障'
+  },
+  {
+    key: 'service',
+    text: '服务保障规则'
+  },
+  {
+    key: 'in_out',
+    text: '商家入驻和退出',
+  },
+  {
+    key: '违规公告',
+    text: '违规公告'
+  },
+  {
+    key: 'user',
+    text: '用户协议'
+  },
+  {
+    key: 'privacy',
+    text: '隐私政策'
+  },
+  {
+    key: 'mail',
+    text: '意见反馈',
+    info: {
+      '反馈邮箱': '反馈邮箱：272344341@qq.com'
+    }
+  },
+]
+
 export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';

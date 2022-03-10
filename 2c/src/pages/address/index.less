@@ -1,0 +1,77 @@
+.address-container {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #070707;
+
+  .address-item {
+    width: 100%;
+    padding: 30rpx 20rpx;
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    .item-info {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .item-top {
+        font-size: 1rem;
+      }
+
+      .item-bottom {
+        margin-top: 15rpx;
+        font-size: 0.9rem;
+
+        .item-checked {
+          border: 1px solid #BE2F3C;
+          border-radius: 5rpx;
+          padding: 0 8rpx;
+          color: #BE2F3C;
+          font-size: 0.8rem;
+          box-sizing: border-box;
+        }
+      }
+
+      .text {
+        margin-right: 15rpx;
+      }
+    }
+
+    .item-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    }
+
+    .item-img {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .item-edit {
+        background-image: url("data:image/svg+xml,%3Csvg t='1646921025094' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='6576' width='200' height='200'%3E%3Cpath d='M802.714 906.739H212.368c-54.338 0-98.39-44.082-98.39-98.452V217.55c0-54.378 44.698-103.115 99.039-103.115h396.155v49.52H213.017c-27.169 0-49.843 26.41-49.843 53.597v590.736c0 27.185 22.026 49.228 49.194 49.228h590.346c27.168 0 54.05-22.623 54.05-49.81V411.553h49.52v396.15c-0.002 54.372-49.23 99.036-103.57 99.036zM508.68 668.173c-7.192 7.199-16.2 10.798-25.486 12.607L267.797 787.325c-24.242 11.257-43.659-10.484-34.725-34.748l106.475-215.542c1.805-9.292 5.404-18.303 12.597-25.501L734.796 128.63c19.211-19.227 50.36-19.227 69.57 0l86.965 87.023c19.214 19.222 19.214 50.395 0 69.618l-382.65 382.902z m-228.498 54.634c-5.628 11.35 5.242 23.006 17.363 17.374l133.01-80.566-69.861-69.907-80.512 133.1z m124.138-159.06l52.182 52.216c9.603 9.612-15.222-15.233 17.39 17.402L752.186 354.89l-87.586-86.403-277.67 277.855c9.24 9.244 7.785 7.794 17.392 17.404z m434.83-330.688l-52.179-52.217c-9.604-9.612-25.18-9.612-34.785 0l-50.935 50.965 85.717 88.27 52.182-52.216c9.607-9.61 9.607-25.19 0-34.802z' p-id='6577' fill='%231D1E1F'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+      }
+  
+      .icon {
+        width: 40rpx;
+        height: 40rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
