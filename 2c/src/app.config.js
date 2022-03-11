@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/detail/index',
     'pages/editAddress/index',
     'pages/address/index',
     'pages/mine/index',
