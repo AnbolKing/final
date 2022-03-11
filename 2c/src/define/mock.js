@@ -112,6 +112,7 @@ export const MINE_INFO = {
 
 export const ADDRESS = [
   {
+    id: '10001',
     name: '王子安',
     phone: '18370605879',
     one_level: '江西省',
@@ -121,6 +122,7 @@ export const ADDRESS = [
     isChecked: true,
   },
   {
+    id: '10002',
     name: '王大炮',
     phone: '18370605879',
     one_level: '北京',

@@ -1,9 +1,21 @@
 import React from 'react';
 import { View, Text } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import { ADDRESS } from '../../define/mock';
 import './index.less';
 
 const Address = () => {
+
+  const handleEditAddress = () => {
+    Taro.navigateTo({
+      url: '../editAddress'
+    })
+  }
+
+  const handleDelete = (id) => {
+
+  }
+
   return (
     <View className='address-container'>
       {
@@ -27,14 +39,17 @@ const Address = () => {
                   <Text className='detail text'>{item.detail}</Text>
                 </View>
               </View>
-              <View className='item-img'>
-                <View className='item-edit icon' />
+              <View className='item-img' onClick={() => handleDelete(item.id)}>
+                <View className='item-delete icon' />
               </View>
               <View className='item-divider' />
             </View>
           )
         })
       }
+      <View className='address-btn' onClick={handleEditAddress}>
+        新建地址
+      </View>
     </View>
   )
 }
