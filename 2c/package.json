@@ -40,9 +40,10 @@
     "@tarojs/react": "3.2.1",
     "@tarojs/runtime": "3.2.1",
     "@tarojs/taro": "3.2.1",
-    "node-sass": "^7.0.1",
+    "node-sass": "^4.14.1",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "taro-ui": "^3.0.0-alpha.10"
   },
   "devDependencies": {
     "@types/webpack-env": "^1.13.6",

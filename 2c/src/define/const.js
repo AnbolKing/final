@@ -1,3 +1,7 @@
+export const CARD_HEIGHT = 580;
+
+export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';
+
 export const TAB_ITEMS = [
   {
     key: 'foods',
@@ -47,8 +51,6 @@ export const ORDER_TAB = [
     text: '待评价',
   }
 ];
-
-export const CARD_HEIGHT = 580;
 
 export const IMG_URL = {
   loading: 'https://s3.bmp.ovh/imgs/2022/03/8d149137c3927d5b.gif' ,
@@ -143,5 +145,3 @@ export const ABOUT_ITEMS = [
     }
   },
 ]
-
-export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';
