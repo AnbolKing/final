@@ -5,11 +5,11 @@ export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';
 export const TAB_ITEMS = [
   {
     key: 'foods',
-    text: '休闲零食',
+    text: '食品',
   },
   {
     key: 'clothes',
-    text: '时尚穿搭',
+    text: '服饰',
   },
   {
     key: 'office',
@@ -17,7 +17,7 @@ export const TAB_ITEMS = [
   },
   {
     key: 'life',
-    text: '生活好物',
+    text: '日用',
   },
   {
     key: 'electric',
@@ -144,4 +144,42 @@ export const ABOUT_ITEMS = [
       '反馈邮箱': '反馈邮箱：272344341@qq.com'
     }
   },
+]
+
+export const DETAIL_INFO = [
+  {
+    key: 'info',
+    text: '参数',
+  },
+  {
+    key: 'go',
+    text: '发货',
+  }
+]
+
+export const INSURE_CONTENT = [
+  {
+    title: '假一赔三',
+    content: '联系平台举证，若正式假冒，可获得全额退款并进行三倍赔付',
+  },
+  {
+    title: '退货补运费',
+    content: '订单发货后90天内，若产生退货退款或换货，平台将补贴退货运费',
+  },
+  {
+    title: '七天无理由退换货',
+    content: '消费者再满足7天无理由退货申请的前提下，可以提出“七天无理由退换货”的申请',
+  },
+  {
+    title: '晚发赔偿',
+    content: '商家未按时发货，补偿一定比例金额',
+  },
+  {
+    title: '商家资质',
+    content: '商家已向平台提交经营执照等相关资质证明',
+  },
+  {
+    title: '消费者保障服务',
+    content: '卖家已缴纳保障金，如有商品质量问题，描述不符等，您有权申请退款或退货',
+  }
 ]

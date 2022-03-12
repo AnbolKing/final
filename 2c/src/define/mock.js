@@ -132,3 +132,31 @@ export const ADDRESS = [
     isChecked: false,
   }
 ]
+
+export const DETAIL = {
+  id: '1001',
+  swiper_imgs: [
+    'https://img1.baidu.com/it/u=2193335351,6115624&fm=253&fmt=auto&app=120&f=JPEG?w=899&h=500',
+    'https://img0.baidu.com/it/u=1242512222,1241183799&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=312',
+    'https://img0.baidu.com/it/u=1538438019,2605145229&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281',
+  ],
+  price: '69',
+  nums: '535',
+  title: '【强者法则全10册】智慧谋略社交心理攻心术谋略人性',
+  tags: ['全新正品', '限时特惠'],
+  insure: ['假一赔三', '退货补运费', '七天无理由退换货'],
+  go: '预计72小时内发货',
+  info: {
+    产地: '江西',
+    生产日期: '',
+  },
+  store_avatar: 'https://img2.baidu.com/it/u=1652427738,3139747163&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+  name: '易果云官方旗舰店',
+  desc: '专注于生态农业发展，为大家种植和甄选大家放心的水果',
+  detail_imgs: [
+    'https://img0.baidu.com/it/u=1571014671,1329084906&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
+    'https://img0.baidu.com/it/u=3310630758,1137644732&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=342',
+    'https://img2.baidu.com/it/u=2607105925,3961406987&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=250',
+    'https://img1.baidu.com/it/u=1374076241,3989169198&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+  ]
+}

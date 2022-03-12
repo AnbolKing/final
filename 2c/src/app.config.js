@@ -1,12 +1,13 @@
 export default {
   pages: [
+    'pages/home/index',
     'pages/detail/index',
+    
     'pages/editAddress/index',
     'pages/address/index',
     'pages/mine/index',
     'pages/about/index',
     'pages/order/index',
-    'pages/home/index',
   ],
   window: {
     backgroundTextStyle: 'light',

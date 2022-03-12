@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Swiper, Image, SwiperItem, ScrollView } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import './index.less';
 import { TAB_ITEMS, CARD_HEIGHT, IMG_URL } from '../../define/const';
 import { LIST_CARDS } from '../../define/mock';
@@ -148,6 +149,14 @@ class Home extends React.Component {
       bottomText: hasMore ? '点我加载更多哦~' : '已经到底了哦~喜欢就下单吧! ',
       hasMore,
       loading: false,
+    })
+  }
+
+  // to good detail
+  handleToItem = (id) => {
+    console.log(id);
+    Taro.navigateTo({
+      url: `../detail/index?id=${id}`,
     })
   }
 
@@ -350,7 +359,11 @@ class Home extends React.Component {
                       cards.map(item => {
                         const priceArr = item.price.split('.');
                         return (
-                          <View className='card-wrapper' key={item.id}>
+                          <View 
+                            className='card-wrapper' 
+                            key={item.id}
+                            onClick={() => this.handleToItem(item.id)}
+                          >
                             <Image src={item.imgUrl} className='card-img' />
                             <View className='card-bottom'>
                               <Text className='card-text'>{item.desc}</Text>
