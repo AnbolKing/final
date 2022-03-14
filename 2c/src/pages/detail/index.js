@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
-import { AtFloatLayout } from "taro-ui";
-import Taro, { useReady, useRouter } from '@tarojs/taro';
+import { AtFloatLayout, AtDivider,AtInputNumber, AtToast, AtCheckbox, AtActivityIndicator } from "taro-ui";
+import Taro, { useReady } from '@tarojs/taro';
 import { DETAIL } from '../../define/mock';
-import { DETAIL_INFO, INSURE_CONTENT } from '../../define/const';
+import { DETAIL_INFO, INSURE_CONTENT, PAY_WAYS, PAY_SELECT } from '../../define/const';
+import { sleep } from '../../utils/sleep';
 import './index.less';
 
 const Detail = () => {
@@ -14,9 +15,15 @@ const Detail = () => {
   const [insure, setInsure] = useState([]);
   const [hasCollect, setHasCollect] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [num, setNum] = useState(1);
   const [scrollHeight, setScrollHeight] = useState(700);
   const [insureOpen, setInsureOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [buyOpen, setBuyOpen] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [payOpen, setPayOpen] = useState(true);
+  const [payWay, setPayWay] = useState('wepay')
 
   const handleBack = () => {
     Taro.navigateBack()
@@ -47,6 +54,39 @@ const Detail = () => {
       return ;
     }
     setInfoOpen(true);
+  }
+
+  const handleBuy = () => {
+    setBuyOpen(true);
+  }
+
+  const handleSelect = (item, index) => {
+    if(selected && index === selected.index) {
+      setSelected(null);
+      return ;
+    }
+    const obj = {
+      index,
+      ...item,
+    }
+    setSelected(obj);
+  }
+
+  const handSubmitBuy = async () => {
+    if(!selected) {
+      console.log('go')
+      setToastOpen(true);
+      return ;
+    }
+    setLoading(true);
+    const res = await sleep(2000, 'success');
+    setLoading(false);
+    setBuyOpen(false);
+    setPayOpen(true)
+  }
+
+  const handleSelectPay = (key) => {
+    setPayWay(key);
   }
 
   const fetchDetail = () => {
@@ -131,6 +171,124 @@ const Detail = () => {
             })
           }
         </View>
+      </>
+    )
+  }
+
+  const renderBuyContent = () => {
+    const priceArr = (selected ? selected.price : detail.price).split('.'); 
+    return (
+      <>
+      <View className='buy-content'>
+        <View className='buy-top'>
+          <Image className='buy-img' src={detail.commodity_img} />
+          <View className='buy-info'>
+            <View className='price'>
+              <Text className='price-text price-unit'>￥</Text>
+              <Text className='price-text price-pre'>{priceArr[0]}</Text>
+              <Text className='price-text price-las'>.{priceArr[1]}</Text>
+            </View>
+            {
+              selected
+              ? <View className='select'>已选：{selected.content}</View>
+              : null
+            }
+          </View>
+          <View 
+            className='buy-icon close-icon' 
+            onClick={() => setBuyOpen(false)}
+          />
+        </View>
+        <AtDivider 
+          className='buy-divider'
+          lineColor='#E1E1E1'
+        />
+        <View className='buy-spec'>
+          <View className='spec-label'>规格</View>
+          <View className='spec-range'>
+            {
+              detail.commodity_range.map((item, index) => {
+                return (
+                  <View 
+                    className={`range-item ${selected && selected.index===index ? 'active' : ''}`} 
+                    key={index}
+                    onClick={() => handleSelect(item, index)}
+                  >
+                    {item.content}
+                  </View>
+                )
+              })
+            }
+          </View>
+        </View>
+        <AtDivider 
+          className='buy-divider'
+          lineColor='#E1E1E1'
+        />
+        <View className='buy-nums'>
+          <View className='spec-label'>规格</View>
+          <AtInputNumber
+            min={1}
+            max={99}
+            step={1}
+            value={num}
+            onChange={(value) => setNum(value)}
+            className='buy-number'
+          />
+        </View>
+      </View>
+      <View className='buy-btn'>
+        <View 
+          className='btn'
+          onClick={handSubmitBuy}>
+            <AtActivityIndicator 
+              isOpened={loading}
+              color="#ffffff"
+            />
+            <Text style={{marginLeft: '20rpx'}}>立即购买</Text>
+        </View>
+      </View>
+      </>
+    )
+  }
+
+  const renderPayContent = () => {
+    return (
+      <>
+      <View className='pay-content'>
+        <View className='top'>
+          ￥<Text className='price'>{selected ? selected.price : detail.price}</Text>
+        </View>
+        <View className='bottom'>
+          {
+            PAY_WAYS.map(item => {
+              return (
+                <View className='pay-item' key={item.key} onClick={() => handleSelectPay(item.key)}>
+                  <View className='left'>
+                    <View className={`icon pay-icon ${item.key}`} />
+                    <Text className='text'>{item.text}</Text>
+                  </View>
+                  <Image 
+                    src={payWay===item.key ? PAY_SELECT.isSelected : PAY_SELECT.noSelected} 
+                    className='way-icon' 
+                  />
+                </View>
+              )
+            })
+          }
+        </View>
+      </View>
+      <View className='pay-btn'>
+        <View 
+          className='btn'
+          onClick={handSubmitBuy}>
+            <AtActivityIndicator 
+              isOpened={loading}
+              color="#ffffff"
+            />
+            <Text style={{marginLeft: '20rpx'}}>立即购买</Text>
+        </View>
+      </View>
       </>
     )
   }
@@ -248,7 +406,7 @@ const Detail = () => {
                       </View>
                     </View>
                     {
-                      item.key==='go'
+                      item.key==='go' || item.key==='selected'
                       ? null
                       : <View className='right arrow-icon' />
                     }
@@ -311,7 +469,7 @@ const Detail = () => {
             <Text className='text'>收藏</Text>
           </View>
         </View>
-        <View className='buy-right'>立即购买</View>
+        <View className='buy-right' onClick={handleBuy}>立即购买</View>
       </View>
       <AtFloatLayout
         isOpened={insureOpen}
@@ -329,6 +487,28 @@ const Detail = () => {
       >
         {renderInfoContent()}
       </AtFloatLayout>
+      <AtFloatLayout
+        isOpened={buyOpen}
+        title='选购商品'
+        onClose={() => setBuyOpen(false)}
+        className='buy-float'  
+      >
+        {renderBuyContent()}
+      </AtFloatLayout>
+      <AtFloatLayout
+        isOpened={payOpen}
+        title='支付'
+        onClose={() => setPayOpen(false)}
+        className='pay-float'  
+      >
+        {renderPayContent()}
+      </AtFloatLayout>
+      <AtToast 
+        isOpened={toastOpen}
+        text={`请选择${detail.commodity_label}`}
+        duration={2000}
+        onClose={() => setToastOpen(false)}
+      />
     </>
   )
 }

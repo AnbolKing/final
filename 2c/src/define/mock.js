@@ -140,7 +140,7 @@ export const DETAIL = {
     'https://img0.baidu.com/it/u=1242512222,1241183799&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=312',
     'https://img0.baidu.com/it/u=1538438019,2605145229&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281',
   ],
-  price: '69',
+  price: '69.9',
   nums: '535',
   title: '【强者法则全10册】智慧谋略社交心理攻心术谋略人性',
   tags: ['全新正品', '限时特惠'],
@@ -158,5 +158,17 @@ export const DETAIL = {
     'https://img0.baidu.com/it/u=3310630758,1137644732&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=342',
     'https://img2.baidu.com/it/u=2607105925,3961406987&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=250',
     'https://img1.baidu.com/it/u=1374076241,3989169198&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+  ],
+  commodity_label: '规格',
+  commodity_img: 'https://img2.baidu.com/it/u=1609425339,3574451547&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+  commodity_range: [
+    {
+      price: '9.9',
+      content: '小果2斤装【65mm以下】',
+    },
+    {
+      price: '19.9',
+      content: '大果5斤装【85mm以下】',
+    },
   ]
 }

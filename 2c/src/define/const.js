@@ -183,3 +183,27 @@ export const INSURE_CONTENT = [
     content: '卖家已缴纳保障金，如有商品质量问题，描述不符等，您有权申请退款或退货',
   }
 ]
+
+export const PAY_WAYS = [
+  {
+    key: 'wxpay',
+    text: '微信支付'
+  },
+  {
+    key: 'alipay',
+    text: '支付宝'
+  },
+  {
+    key: 'huabei',
+    text: '花呗'
+  },
+  {
+    key: 'yinlian',
+    text: '银联云闪付'
+  }
+]
+
+export const PAY_SELECT = {
+  isSelected: 'https://s3.bmp.ovh/imgs/2022/03/95257d9e34e90064.png',
+  noSelected: 'https://s3.bmp.ovh/imgs/2022/03/9bdd0ae8f9d7946d.png'
+};
