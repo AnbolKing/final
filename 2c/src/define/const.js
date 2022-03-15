@@ -152,6 +152,10 @@ export const DETAIL_INFO = [
     text: '参数',
   },
   {
+    key: 'address',
+    text: '地址',
+  },
+  {
     key: 'go',
     text: '发货',
   }

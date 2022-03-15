@@ -21,7 +21,7 @@ const Address = () => {
       {
         ADDRESS.map((item, index) => {
           return (
-            <View className='address-item'>
+            <View className='address-item' key={index}>
               <View className='item-info'>
                 <View className='item-top'>
                   <Text className='name text'>{item.name}</Text>

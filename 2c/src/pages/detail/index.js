@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
-import { AtFloatLayout, AtDivider,AtInputNumber, AtToast, AtCheckbox, AtActivityIndicator } from "taro-ui";
+import { AtFloatLayout, AtDivider,AtInputNumber, AtToast, AtModal, AtActivityIndicator } from "taro-ui";
 import Taro, { useReady } from '@tarojs/taro';
-import { DETAIL } from '../../define/mock';
+import { DETAIL, ADDRESS } from '../../define/mock';
 import { DETAIL_INFO, INSURE_CONTENT, PAY_WAYS, PAY_SELECT } from '../../define/const';
 import { sleep } from '../../utils/sleep';
 import './index.less';
@@ -22,11 +22,17 @@ const Detail = () => {
   const [buyOpen, setBuyOpen] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [payOpen, setPayOpen] = useState(true);
-  const [payWay, setPayWay] = useState('wepay')
+  const [payOpen, setPayOpen] = useState(false);
+  const [payWay, setPayWay] = useState('');
+  const [payToast, setPayToast] = useState(false);
+  const [payModal, setPayModal] = useState(false);
+  const [address, setAddress] = useState('');
+  const [addressIndex, setAddressIndex] = useState(0);
+  const [infoKey, setInfoKey] = useState('');
+  const [infoTitle, setInfoTitle] = useState('商品参数');
 
   const handleBack = () => {
-    Taro.navigateBack()
+    Taro.navigateBack();
   }
 
   const handleSwiper = (e) => {
@@ -53,6 +59,8 @@ const Detail = () => {
     if(key === 'go') {
       return ;
     }
+    setInfoKey(key);
+    setInfoTitle(key==='info' ? '商品参数' : '选择地址');
     setInfoOpen(true);
   }
 
@@ -86,7 +94,32 @@ const Detail = () => {
   }
 
   const handleSelectPay = (key) => {
+    if(key === payWay) {
+      setPayWay('');
+      return ;
+    }
     setPayWay(key);
+  }
+
+  const handleSelectAddress = (ele, index) => {
+    let ans = ele.name + ' ' + ele.phone + ' ' + ele.one_level + ' ' + ele.two_level + ' ' + ele.three_level + ' ' + ele.detail;
+    setAddress(ans);
+    setAddressIndex(index);
+    setInfoOpen(false);
+  }
+
+  const handlePay = async () => {
+    if(!payWay) {
+      setPayToast(true);
+      return ;
+    }
+    setPayModal(true);
+    const res = await sleep(2000, 'success');
+    setPayModal(false);
+    setPayOpen(false);
+    Taro.navigateTo({
+      url: '../success/index',
+    })
   }
 
   const fetchDetail = () => {
@@ -112,6 +145,17 @@ const Detail = () => {
     setTags(newTags);
   }
 
+  const fetchAddress = async () => {
+    const res = await sleep(1000, ADDRESS);
+    res.forEach((ele, index) => {
+      if(ele.isChecked) {
+        let ans = ele.name + ' ' + ele.phone + ' ' + ele.one_level + ' ' + ele.two_level + ' ' + ele.three_level + ' ' + ele.detail;
+        setAddress(ans);
+        setAddressIndex(index);
+      }
+    });
+  }
+
   const fetchScrollHeight = () => {
     const allHeight = Taro.getSystemInfoSync().windowHeight;
     const query = Taro.createSelectorQuery();
@@ -130,6 +174,9 @@ const Detail = () => {
     }
     if(key === 'go') {
       return detail.go
+    }
+    if(key === 'address') {
+      return address;
     }
   }
 
@@ -157,8 +204,8 @@ const Detail = () => {
 
   const renderInfoContent = () => {
     const objs = Object.entries(detail.info);
-    return (
-      <>
+    if(infoKey === 'info') {
+      return (
         <View className='info-content'>
           {
             objs.map((item, index) => {
@@ -171,12 +218,45 @@ const Detail = () => {
             })
           }
         </View>
-      </>
-    )
+      )
+    }
+    if(infoKey === 'address') {
+      return (
+        <View className='address-content'>
+        {
+          ADDRESS.map((item, index) => {
+            return (
+              <View className='address-item' key={index} onClick={() => handleSelectAddress(item, index)}>
+                <View className='item-info'>
+                  <View className='item-top'>
+                    <Text className='name text'>{item.name}</Text>
+                    <Text className='phone text'>{item.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}</Text>  
+                  </View>
+                  <View className='item-bottom'>
+                    {
+                      index===addressIndex ? (
+                        <Text className='item-checked text'>当前使用</Text>
+                      ) : null
+                    }
+                    <Text className='one text'>{item.one_level}</Text>
+                    <Text className='two text'>{item.two_level}</Text>
+                    <Text className='three text'>{item.three_level}</Text>
+                    <Text className='detail text'>{item.detail}</Text>
+                  </View>
+                </View>
+                <View className='item-divider' />
+              </View>
+            )
+          })
+        }
+        </View>
+      )
+    }
   }
 
   const renderBuyContent = () => {
-    const priceArr = (selected ? selected.price : detail.price).split('.'); 
+    const finalPrice = (Number(selected ? selected.price : detail.price) * num).toFixed(2);
+    const priceArr = finalPrice.split('.'); 
     return (
       <>
       <View className='buy-content'>
@@ -226,7 +306,7 @@ const Detail = () => {
           lineColor='#E1E1E1'
         />
         <View className='buy-nums'>
-          <View className='spec-label'>规格</View>
+          <View className='spec-label'>数量</View>
           <AtInputNumber
             min={1}
             max={99}
@@ -281,11 +361,8 @@ const Detail = () => {
       <View className='pay-btn'>
         <View 
           className='btn'
-          onClick={handSubmitBuy}>
-            <AtActivityIndicator 
-              isOpened={loading}
-              color="#ffffff"
-            />
+          onClick={handlePay}
+        >
             <Text style={{marginLeft: '20rpx'}}>立即购买</Text>
         </View>
       </View>
@@ -296,6 +373,7 @@ const Detail = () => {
   // init
   useEffect(() => {
     fetchDetail();
+    fetchAddress();
   }, [])
 
   useReady(() => {
@@ -401,7 +479,7 @@ const Detail = () => {
                   >
                     <View className='left'>
                       <View className='label'>{item.text}</View>
-                      <View className='content'>
+                      <View className={`content ${item.key==='address' ? 'address' : ''}`}>
                         {renderContent(item.key)}
                       </View>
                     </View>
@@ -481,7 +559,7 @@ const Detail = () => {
       </AtFloatLayout>
       <AtFloatLayout
         isOpened={infoOpen}
-        title='商品参数'
+        title={infoTitle}
         onClose={() => setInfoOpen(false)}
         className='info-float'  
       >
@@ -498,7 +576,10 @@ const Detail = () => {
       <AtFloatLayout
         isOpened={payOpen}
         title='支付'
-        onClose={() => setPayOpen(false)}
+        onClose={() => {
+          setPayOpen(false);
+          setPayWay('');
+        }}
         className='pay-float'  
       >
         {renderPayContent()}
@@ -509,6 +590,19 @@ const Detail = () => {
         duration={2000}
         onClose={() => setToastOpen(false)}
       />
+      <AtToast 
+        isOpened={payToast}
+        text='请选择支付方式'
+        duration={1000}
+        onClose={() => setPayToast(false)}
+      />
+      <AtModal isOpened={payModal} className='pay-loading'>
+        <AtActivityIndicator 
+          isOpened={true}
+          color="#ffffff"
+        />
+        <Text className='text'>支付中</Text>
+      </AtModal>
     </>
   )
 }
