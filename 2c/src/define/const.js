@@ -1,5 +1,7 @@
 export const CARD_HEIGHT = 580;
 
+export const STORE_BG = 'https://img0.baidu.com/it/u=2782169177,194856843&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500';
+
 export const BG_IMG = 'https://s3.bmp.ovh/imgs/2022/03/a3464291424dbfde.jpeg';
 
 export const TAB_ITEMS = [

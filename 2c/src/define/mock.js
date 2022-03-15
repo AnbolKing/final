@@ -172,3 +172,10 @@ export const DETAIL = {
     },
   ]
 }
+
+export const STORE_INFO = {
+  store_avatar: 'https://img2.baidu.com/it/u=1652427738,3139747163&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+  name: '易果云官方旗舰店',
+  desc: '专注于生态农业发展，为大家种植和甄选大家放心的水果',
+  list: LIST_CARDS,
+}

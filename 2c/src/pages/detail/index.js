@@ -31,6 +31,12 @@ const Detail = () => {
   const [infoKey, setInfoKey] = useState('');
   const [infoTitle, setInfoTitle] = useState('商品参数');
 
+  const handleStore = () => {
+    Taro.navigateTo({
+      url: '../store/index',
+    })
+  }
+
   const handleBack = () => {
     Taro.navigateBack();
   }
@@ -500,7 +506,7 @@ const Detail = () => {
             <View className='store-info'>
               <Text className='name'>{detail.name}</Text>
               <Text className='desc'>{detail.desc}</Text>
-              <View className='btn'>进店逛逛</View>
+              <View className='btn' onClick={handleStore}>进店逛逛</View>
             </View>
           </View>
         </View>

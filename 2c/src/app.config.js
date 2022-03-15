@@ -1,8 +1,11 @@
 export default {
   pages: [
+    'pages/login/index',
+    'pages/collect/index',
+    'pages/home/index',
+    'pages/store/index',
     'pages/detail/index',
     'pages/success/index',
-    'pages/home/index',
     'pages/editAddress/index',
     'pages/address/index',
     'pages/mine/index',

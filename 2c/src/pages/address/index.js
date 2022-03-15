@@ -8,7 +8,7 @@ const Address = () => {
 
   const handleEditAddress = () => {
     Taro.navigateTo({
-      url: '../editAddress'
+      url: '../editAddress/index'
     })
   }
 
