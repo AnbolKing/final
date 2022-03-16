@@ -1,16 +1,16 @@
 export default {
   pages: [
+    'pages/mine/index',
+    'pages/order/index',
+    'pages/home/index',
     'pages/login/index',
     'pages/collect/index',
-    'pages/home/index',
     'pages/store/index',
     'pages/detail/index',
     'pages/success/index',
     'pages/editAddress/index',
     'pages/address/index',
-    'pages/mine/index',
     'pages/about/index',
-    'pages/order/index',
   ],
   window: {
     backgroundTextStyle: 'light',

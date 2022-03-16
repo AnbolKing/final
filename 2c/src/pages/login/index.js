@@ -80,7 +80,7 @@ const Login = () => {
             name='name' 
             title='用户名' 
             type='text' 
-            placeholder='单行文本' 
+            placeholder='请输入用户名' 
             value={name}
             required
             onChange={handleChangeName}
@@ -92,7 +92,7 @@ const Login = () => {
             name='password' 
             title='密码' 
             type='password' 
-            placeholder='单行文本' 
+            placeholder='请输入密码' 
             value={password}
             required
             onChange={handleChangePassword} 
@@ -120,7 +120,7 @@ const Login = () => {
             name='name' 
             title='用户名' 
             type='text' 
-            placeholder='单行文本' 
+            placeholder='请输入用户名' 
             value={name}
             required
             onChange={handleChangeName}
@@ -132,7 +132,7 @@ const Login = () => {
             name='password' 
             title='密码' 
             type='password' 
-            placeholder='单行文本' 
+            placeholder='请输入密码' 
             value={password}
             required
             onChange={handleChangePassword} 

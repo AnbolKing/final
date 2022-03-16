@@ -4,57 +4,16 @@
   box-sizing: border-box;
 
   .tab-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 80rpx;
-
-    .tab-item {
-      color: #808182;
-      font-size: 0.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      position: relative;
-
-      .tab-text {
-        z-index: 99;
-      }
-
-      .num-tag {
-        position: absolute;
-        width: 32rpx;
-        height: 32rpx;
-        border-radius: 50%;
-        background-color: #DF6053;
-        color: #ffffff;
-        font-family: 'Din-Bold';
-        top: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.5rem;
-        padding: 0;
-        transform: translate(70%, 50%);
-        box-sizing: border-box;
-        line-height: 0;
-
-        .tag-text {
-          transform: translateY(-50%);
-        }
-      }
+    .at-tab-bar {
+      box-sizing: border-box;
     }
-
-    .tab-item-active {
-      color: #000000;
+    .at-tab-bar__item--active {
       font-weight: 700;
       position: relative;
-      font-size: 0.9rem;
 
       &::after {
+        position: absolute;
+        bottom: 0;
         content: "";
         display: block;
         height: 10rpx;
@@ -288,4 +247,14 @@
   50%{-webkit-transform:rotate(180deg);}
   75%{-webkit-transform:rotate(270deg);}
   100%{-webkit-transform:rotate(360deg);}
+}
+
+.card-modal {
+  .at-modal__container {
+    width: auto;
+    .at-modal__content {
+      text-align: center;
+      min-height: 0;
+    }
+  }
 }

@@ -34,23 +34,19 @@ export const TAB_ITEMS = [
 export const ORDER_TAB = [
   {
     key: 'all',
-    text: '全部',
-  },
-  {
-    key: 'wait_pay',
-    text: '待支付',
+    title: '全部',
   },
   {
     key: 'wait_go',
-    text: '待发货',
+    title: '待发货',
   },
   {
     key: 'wait_recive',
-    text: '待收货',
+    title: '待收货',
   },
   {
     key: 'wait_judge',
-    text: '待评价',
+    title: '待评价',
   }
 ];
 
@@ -61,10 +57,9 @@ export const IMG_URL = {
 }
 
 export const ORDER_STATUS = {
-  1: '待付款',
-  2: '待发货',
-  3: '待收货',
-  4: '待评价',
+  1: '待发货',
+  2: '待收货',
+  3: '待评价',
 }
 
 export const ORDER_BENEFIT = {
@@ -92,10 +87,6 @@ export const MINE_TABS = [
 ]
 
 export const MINE_ORDERS = [
-  {
-    imgClass: 'wait_pay',
-    text: '待支付',
-  },
   {
     imgClass: 'wait_go',
     text: '待发货',

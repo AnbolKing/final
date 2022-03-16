@@ -40,19 +40,23 @@ class Home extends React.Component {
       hotItems: [
         {
           imgUrl: 'https://img2.baidu.com/it/u=2031330930,1299798005&fm=26&fmt=auto',
-          price: '5.01'
+          price: '5.01',
+          id: '1234rfv',
         },
         {
           imgUrl: 'https://img1.baidu.com/it/u=4067931509,3749667927&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
           price: '7.99',
+          id: '1234rfv',
         },
         {
           imgUrl: 'https://img1.baidu.com/it/u=4067931509,3749667927&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
           price: '10.1',
+          id: '1234rfv',
         },
         {
           imgUrl: 'https://img2.baidu.com/it/u=1000228727,1004721926&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
           price: '29.9',
+          id: '1234rfv',
         }
       ]
     })
@@ -265,7 +269,7 @@ class Home extends React.Component {
               hotItems.map((item, index) => {
                 const priceArr = item.price.split('.');
                 return (
-                  <View className='item-wrapper' key={index}>
+                  <View className='item-wrapper' key={index} onClick={() => this.handleToItem(item.id)}>
                     <Image
                       src={item.imgUrl}
                       className='item-img'
@@ -349,6 +353,7 @@ class Home extends React.Component {
           autoplay={false}
           style={{ height: `${scrollHeight}rpx` }}
           onChange={this.handleSwiperTab}
+          current={tabAvtive}
         >
           {
             TAB_ITEMS.map((tabs, index) => {

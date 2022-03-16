@@ -54,7 +54,7 @@ export const ORDER_ITEM  = [
   {
     store_img: 'https://img2.baidu.com/it/u=2363838054,3930871158&fm=253&fmt=auto&app=138&f=JPEG?w=652&h=500',
     store_name: '上海荣誉体育运动专卖店',
-    status: 3,
+    status: 1,
     good_img: 'https://img1.baidu.com/it/u=883504995,1605864769&fm=26&fmt=auto',
     good_desc: 'Nike耐克 AJ Air Jordan 1 AJ灰绿色',
     good_price: '1499',
@@ -67,7 +67,7 @@ export const ORDER_ITEM  = [
   {
     store_img: 'https://img2.baidu.com/it/u=2363838054,3930871158&fm=253&fmt=auto&app=138&f=JPEG?w=652&h=500',
     store_name: '上海荣誉体育运动专卖店',
-    status: 3,
+    status: 2,
     good_img: 'https://img1.baidu.com/it/u=883504995,1605864769&fm=26&fmt=auto',
     good_desc: 'Nike耐克 AJ Air Jordan 1 AJ灰绿色',
     good_price: '1499',
